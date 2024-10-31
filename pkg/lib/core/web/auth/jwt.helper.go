@@ -120,16 +120,14 @@ func trimBearer(tokenStr string) string {
 }
 
 func init() {
-	openDotEnv("\\.env")
+	openDotEnv("../.env")
 	enviro := os.Getenv("environment")
 	if enviro != "" {
-		openDotEnv(fmt.Sprintf("\\.env.%v", enviro))
+		openDotEnv(fmt.Sprintf("../.env.%v", enviro))
 	}
 }
 
 func openDotEnv(path string) {
-	workdir, _ := os.Getwd()
-	path = workdir + path
 
 	if err := godotenv.Load(path); err != nil {
 		log.Printf("Error loading .env file: %v", err.Error())
