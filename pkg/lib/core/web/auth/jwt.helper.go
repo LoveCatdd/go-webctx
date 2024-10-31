@@ -120,10 +120,10 @@ func trimBearer(tokenStr string) string {
 }
 
 func init() {
-	openDotEnv("/.env")
+	openDotEnv("\\.env")
 	enviro := os.Getenv("environment")
 	if enviro != "" {
-		openDotEnv(fmt.Sprintf("/.env.%v", enviro))
+		openDotEnv(fmt.Sprintf("\\.env.%v", enviro))
 	}
 }
 
