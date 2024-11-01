@@ -2,7 +2,7 @@ package auth
 
 type JWTConfig struct {
 	Jwt struct {
-		Secret string `mapstructure:"scecret"`
+		Secret string `mapstructure:"secret"`
 	} `mapstructure:"jwt"`
 }
 
