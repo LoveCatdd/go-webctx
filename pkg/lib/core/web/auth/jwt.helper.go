@@ -3,12 +3,10 @@ package auth
 import (
 	"fmt"
 	"log"
-	"os"
 	"strings"
 	"time"
 
 	"github.com/golang-jwt/jwt/v4"
-	"github.com/joho/godotenv"
 )
 
 const (
@@ -29,10 +27,6 @@ const (
 	JWT_USERNAME         = "USER_NAME"         // 用户名
 	JWT_USERID           = "USER_ID"           // 用户ID
 	JWT_USERIDENTITYNAME = "USER_IDENTITYNAME" // 用户唯一ID
-)
-
-var (
-	secret = os.Getenv("jwt_secret")
 )
 
 func NewMapClaims(head map[string]any) jwt.MapClaims {
@@ -56,7 +50,7 @@ func NewMapClaims(head map[string]any) jwt.MapClaims {
 func GenerateTokens(claims jwt.MapClaims) (token string, refreshToken string) {
 
 	// create token
-	token, err := jwt.NewWithClaims(jwt.SigningMethodHS256, claims).SignedString([]byte(secret))
+	token, err := jwt.NewWithClaims(jwt.SigningMethodHS256, claims).SignedString([]byte(JwtConfig.Jwt.Secret))
 	if err != nil {
 		// todo log here
 		log.Printf("create token failed: %s", err.Error())
@@ -67,7 +61,7 @@ func GenerateTokens(claims jwt.MapClaims) (token string, refreshToken string) {
 	refreshClaims := NewMapClaims(map[string]any{})
 	refreshClaims[JWT_EXP] = time.Now().Add(time.Hour * 24 * 7 * 2).Unix() // 有效期两周
 
-	refreshToken, err = jwt.NewWithClaims(jwt.SigningMethodHS256, refreshClaims).SignedString([]byte(secret))
+	refreshToken, err = jwt.NewWithClaims(jwt.SigningMethodHS256, refreshClaims).SignedString([]byte(JwtConfig.Jwt.Secret))
 	if err != nil {
 		// todo log here
 		log.Printf("create refresh token failed: %s", err.Error())
@@ -111,25 +105,10 @@ func ValidateToken(tokenStr string) (*jwt.Token, error) {
 		}
 
 		// 返回验证密钥
-		return []byte(secret), nil
+		return []byte(JwtConfig.Jwt.Secret), nil
 	}, jwt.WithValidMethods([]string{"HS256"}))
 }
 
 func trimBearer(tokenStr string) string {
 	return strings.TrimPrefix(tokenStr, JWT_BEARER)
-}
-
-func init() {
-	openDotEnv("../.env")
-	enviro := os.Getenv("environment")
-	if enviro != "" {
-		openDotEnv(fmt.Sprintf("../.env.%v", enviro))
-	}
-}
-
-func openDotEnv(path string) {
-
-	if err := godotenv.Load(path); err != nil {
-		log.Printf("Error loading .env file: %v", err.Error())
-	}
 }
