@@ -6,4 +6,8 @@ type JWTConfig struct {
 	} `mapstructure:"jwt"`
 }
 
+func (j *JWTConfig) FileType() string {
+	return "yaml"
+}
+
 var JwtConfig JWTConfig
