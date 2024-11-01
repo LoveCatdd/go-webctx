@@ -1,5 +1,6 @@
 package auth
 
+// VIPER CONFIG STRUCT
 type JWTConfig struct {
 	Jwt struct {
 		Secret string `mapstructure:"secret"`
@@ -10,4 +11,4 @@ func (j *JWTConfig) FileType() string {
 	return "yaml"
 }
 
-var JwtConfig JWTConfig
+var JwtConfig = new(JWTConfig)
