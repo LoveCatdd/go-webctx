@@ -12,3 +12,5 @@ type App struct {
 func (s *App) FileType() string {
 	return config.VIPER_YAML
 }
+
+var AppConf = new(App)
