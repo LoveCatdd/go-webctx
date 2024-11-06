@@ -53,19 +53,19 @@ func Success() JSON {
 	})
 }
 
-func FailWithMessage(url, message string) JSON {
+func FailWithMessage(code int, url, message string) JSON {
 	return json(Response{
-		Code:     UNKNOWN_FAIL,
-		CodeName: StatusName(UNKNOWN_FAIL),
+		Code:     code,
+		CodeName: StatusName(code),
 		Message:  message,
 		Url:      url,
 	})
 }
 
-func Fail(url string) JSON {
+func Fail(code int, url string) JSON {
 	return json(Response{
-		Code:     UNKNOWN_FAIL,
-		CodeName: StatusName(UNKNOWN_FAIL),
+		Code:     code,
+		CodeName: StatusName(code),
 		Url:      url,
 	})
 }

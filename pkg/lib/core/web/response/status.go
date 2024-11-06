@@ -21,6 +21,9 @@ const (
 	TIMEOUT_FAIL = -52
 
 	REQUEST_INPUT_FAIL = -60
+
+	JSON_UNMARSHAL_FAIL = -70
+	JSON_MARSHAL_FAIL   = -71
 )
 
 func StatusName(code int) string {
@@ -45,6 +48,10 @@ func StatusName(code int) string {
 		return "timeout fail"
 	case REQUEST_INPUT_FAIL:
 		return "request input fail"
+	case JSON_UNMARSHAL_FAIL:
+		return "json unmarshal fail"
+	case JSON_MARSHAL_FAIL:
+		return "json marshal fail"
 	default:
 		return "default no code status"
 	}
