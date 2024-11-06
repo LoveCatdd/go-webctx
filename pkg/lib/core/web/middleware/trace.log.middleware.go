@@ -31,7 +31,7 @@ func TraceMiddleware() gin.HandlerFunc {
 		log.
 			Info("requst_info start: path: %v, method: %v, ip: %v, query: %v, request_body: %v",
 				path, c.Request.Method,
-				query, string(request_body), c.ClientIP())
+				c.ClientIP(), query, string(request_body))
 
 			// 重新获取
 		c.Request.Body = io.NopCloser(bytes.NewReader(request_body))
