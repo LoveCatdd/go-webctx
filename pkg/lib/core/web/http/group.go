@@ -19,7 +19,7 @@ type AppEngine struct {
 var appEngine *AppEngine
 
 func NewAppEngine(engine *gin.Engine) {
-	appEngine := new(AppEngine)
+	appEngine = new(AppEngine)
 	appEngine.engine = engine
 	appEngine.port = server.AppConf.Server.Port
 	appEngine.rootServerName = server.AppConf.Server.Name
