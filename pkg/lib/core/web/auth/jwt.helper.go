@@ -2,10 +2,10 @@ package auth
 
 import (
 	"fmt"
-	"log"
 	"strings"
 	"time"
 
+	"github.com/LoveCatdd/util/pkg/lib/core/log"
 	"github.com/golang-jwt/jwt/v4"
 )
 
@@ -53,7 +53,7 @@ func GenerateTokens(claims jwt.MapClaims) (token string, refreshToken string) {
 	token, err := jwt.NewWithClaims(jwt.SigningMethodHS256, claims).SignedString([]byte(JwtConfig.Jwt.Secret))
 	if err != nil {
 		// todo log here
-		log.Printf("create token failed: %s", err.Error())
+		log.Error("create token failed: %s", err.Error())
 		return "", ""
 	}
 
@@ -64,7 +64,7 @@ func GenerateTokens(claims jwt.MapClaims) (token string, refreshToken string) {
 	refreshToken, err = jwt.NewWithClaims(jwt.SigningMethodHS256, refreshClaims).SignedString([]byte(JwtConfig.Jwt.Secret))
 	if err != nil {
 		// todo log here
-		log.Printf("create refresh token failed: %s", err.Error())
+		log.Error("create refresh token failed: %s", err.Error())
 		return "", ""
 	}
 
@@ -77,7 +77,7 @@ func ExtractMapClaims(tokenStr string) (jwt.MapClaims, error) {
 
 	if err != nil {
 		// todo log
-		log.Printf("ExtractMapClaims err: %s", err.Error())
+		log.Error("ExtractMapClaims err: %s", err.Error())
 		return nil, err
 	}
 
@@ -88,7 +88,7 @@ func ExtractMapClaims(tokenStr string) (jwt.MapClaims, error) {
 	} else {
 
 		// todo log
-		log.Printf("ExtractMapClaims err: claims failed ok:[%t] valid:[%t]", ok, token.Valid)
+		log.Error("ExtractMapClaims err: claims failed ok:[%t] valid:[%t]", ok, token.Valid)
 		return nil, err
 	}
 }
