@@ -3,6 +3,7 @@ package http
 import (
 	"fmt"
 
+	"github.com/LoveCatdd/util/pkg/lib/core/log"
 	"github.com/LoveCatdd/webctx/pkg/lib/core/web/middleware"
 	"github.com/LoveCatdd/webctx/pkg/lib/core/web/server"
 	"github.com/gin-gonic/gin"
@@ -29,6 +30,8 @@ func RootRouterGroup() *gin.RouterGroup {
 	return appEngine.root
 }
 
-func Run() error {
-	return appEngine.engine.Run(fmt.Sprintf(":%v", appEngine.port))
+func Run() {
+	if err := appEngine.engine.Run(fmt.Sprintf(":%v", appEngine.port)); err != nil {
+		log.Fatal("Error starting server: %v", err)
+	}
 }
