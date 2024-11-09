@@ -1,6 +1,6 @@
 package auth
 
-import "github.com/LoveCatdd/util/pkg/lib/core/config"
+import "github.com/LoveCatdd/util/pkg/lib/core/viper"
 
 // VIPER CONFIG STRUCT
 type JWTConfig struct {
@@ -10,7 +10,7 @@ type JWTConfig struct {
 }
 
 func (j *JWTConfig) FileType() string {
-	return config.VIPER_YAML
+	return viper.VIPER_YAML
 }
 
 var JwtConfig = new(JWTConfig)

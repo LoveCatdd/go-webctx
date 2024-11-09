@@ -1,6 +1,6 @@
 package server
 
-import "github.com/LoveCatdd/util/pkg/lib/core/config"
+import "github.com/LoveCatdd/util/pkg/lib/core/viper"
 
 type App struct {
 	Server struct {
@@ -10,7 +10,7 @@ type App struct {
 }
 
 func (s *App) FileType() string {
-	return config.VIPER_YAML
+	return viper.VIPER_YAML
 }
 
 var AppConf = new(App)
