@@ -32,6 +32,6 @@ func RootRouterGroup() *gin.RouterGroup {
 
 func Run() {
 	if err := appEngine.engine.Run(fmt.Sprintf(":%v", appEngine.port)); err != nil {
-		log.Fatal("Error starting server: %v", err)
+		log.Fatalf("Error starting server: %v", err)
 	}
 }

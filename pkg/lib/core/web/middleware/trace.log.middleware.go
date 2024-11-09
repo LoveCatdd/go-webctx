@@ -29,7 +29,7 @@ func TraceMiddleware() gin.HandlerFunc {
 		query := c.Request.URL.RawQuery
 		request_body, _ := io.ReadAll(c.Request.Body)
 		log.
-			Info("requst_info start: path: %v, method: %v, ip: %v, query: %v, request_body: %v",
+			Infof("requst_info start: path: %v, method: %v, ip: %v, query: %v, request_body: %v",
 				path, c.Request.Method,
 				c.ClientIP(), query, string(request_body))
 
@@ -40,7 +40,7 @@ func TraceMiddleware() gin.HandlerFunc {
 
 		cost := time.Since(start)
 		log.
-			Info("requst_info end: status: %v, path: %v, method: %v, ip: %v, cost: %v, response_body: %v",
+			Infof("requst_info end: status: %v, path: %v, method: %v, ip: %v, cost: %v, response_body: %v",
 				c.Writer.Status(), path, c.Request.Method,
 				c.ClientIP(), cost,
 				customWriter.body.String())
