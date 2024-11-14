@@ -70,11 +70,11 @@ func Fail(code int, url string) JSON {
 	})
 }
 
-func FailWithCodeAndMessage(code int, url, message string) JSON {
+func FailWithResp(code int, url string, resp any) JSON {
 	return json(Response{
 		Url:      url,
 		Code:     code,
 		CodeName: StatusName(code),
-		Message:  message,
+		Resp:     resp,
 	})
 }

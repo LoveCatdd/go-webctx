@@ -32,7 +32,7 @@ func ContextMiddleware() gin.HandlerFunc {
 			// log todo
 			ctx.JSON(
 				http.StatusNetworkAuthenticationRequired,
-				response.FailWithCodeAndMessage(
+				response.FailWithMessage(
 					response.AUTHORIZE_FAIL,
 					fmt.Sprintf("/%s%s", ctx.Request.Host, ctx.Request.URL.String()),
 					"Authorization err",
