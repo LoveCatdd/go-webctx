@@ -1,2 +1,6 @@
-vwersion: go 20
-import: go get github.com/LoveCatdd/webctx
+base on go version: v1.20.7
+
+### import: 
+``` go
+go get github.com/LoveCatdd/webctx
+```
