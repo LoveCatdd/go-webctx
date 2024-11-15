@@ -16,6 +16,14 @@ type AppEngine struct {
 	rootServerName string           // 根路由路径
 }
 
+type RoutePath struct {
+	method, path string // 路由路径
+}
+
+func (rp RoutePath) String() string {
+	return "<" + rp.method + " " + rp.path + ">\t"
+}
+
 var appEngine *AppEngine
 
 func NewAppEngine(engine *gin.Engine) {
@@ -32,9 +40,10 @@ func RootRouterGroup() *gin.RouterGroup {
 
 func Run() {
 
-	urls := make(map[string]string)
+	urls := RoutePath{}
 	for _, url := range appEngine.engine.Routes() {
-		urls[url.Method] = url.Path
+		urls.method = url.Method
+		urls.path = url.Path
 	}
 	log.Infof("app server http urls:\t%v", urls)
 
