@@ -17,11 +17,11 @@ type AppEngine struct {
 }
 
 type RoutePath struct {
-	method, path string // 路由路径
+	method, path, handler string // 路由路径
 }
 
 func (rp RoutePath) String() string {
-	return "<" + rp.method + " " + rp.path + ">\t"
+	return "<" + rp.method + " " + rp.path + " --> " + rp.handler + ">\t"
 }
 
 var appEngine *AppEngine
@@ -40,10 +40,9 @@ func RootRouterGroup() *gin.RouterGroup {
 
 func Run() {
 
-	urls := RoutePath{}
+	urls := make([]RoutePath, 0)
 	for _, url := range appEngine.engine.Routes() {
-		urls.method = url.Method
-		urls.path = url.Path
+		urls = append(urls, RoutePath{method: url.Method, path: url.Path, handler: url.Handler})
 	}
 	log.Infof("app server http urls:\t%v", urls)
 
