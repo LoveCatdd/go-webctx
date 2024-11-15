@@ -34,4 +34,11 @@ func Run() {
 	if err := appEngine.engine.Run(fmt.Sprintf(":%v", appEngine.port)); err != nil {
 		log.Fatalf("Error starting server: %v", err)
 	}
+
+	urls := make(map[string]string)
+	for _, url := range appEngine.engine.Routes() {
+		urls[url.Method] = url.Path
+	}
+
+	log.Infof("app server http urls:\t%v", urls)
 }
